@@ -1,0 +1,25 @@
+.container{
+    flex: 1;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.content{
+    padding-top: 1rem;
+}
+
+.subHeader{
+    position: absolute;
+}
+
+.sidenav{
+min-width: 200px;
+}

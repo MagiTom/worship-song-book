@@ -1,0 +1,20 @@
+.chord{
+    font-weight: bold;
+}
+
+.song{
+    margin: 0 auto;
+    width: fit-content;
+    &__title{
+        text-align: center;
+    }
+
+    &__text {
+        columns: 2; /* Podział treści na dwie kolumny */
+        column-gap: 20px; /* Odstęp między kolumnami */
+      }
+      
+      &__text pre {
+        margin: 0; /* Usunięcie domyślnego marginesu */
+      }
+}

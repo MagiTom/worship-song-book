@@ -1,0 +1,23 @@
+<div class="main">
+  <app-toolbar (toggleOne)="nav1.toggle()" (toggleTwo)="nav2.toggle()"></app-toolbar>
+  <mat-sidenav-container class="container"  [style.marginTop.px]="height">
+      <mat-sidenav #nav1 [fixedTopGap]="height" class="sidenav" opened mode="side">
+        <mat-toolbar class="subHeader">
+          <button (click)="openAddSong()" mat-raised-button color="primary">Dodaj</button>
+        </mat-toolbar>
+        @if (songs()) {
+          <app-sidenav-list [songs]="songs()" />
+        }
+
+      </mat-sidenav>
+      <mat-sidenav #nav2 [fixedTopGap]="height" class="sidenav" opened mode="side" position="end">
+        <mat-toolbar class="subHeader">
+           <button mat-raised-button color="primary">Drukuj</button>
+        </mat-toolbar>
+        <app-sidenav-list [printMode]="true" [songs]="songsFromDb()"/>
+      </mat-sidenav>
+      <mat-sidenav-content class="content">
+        <router-outlet />
+      </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
