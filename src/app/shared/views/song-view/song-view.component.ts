@@ -2,6 +2,7 @@ import { Component, Input, OnInit, effect, inject } from '@angular/core';
 import { SongRes } from '../../../models/song.model';
 import { CommonModule } from '@angular/common';
 import { FirebaseService } from '../../../services/firebase.service';
+import { DbService } from '../../../services/db.service';
 
 @Component({
   selector: 'app-song-view',
@@ -11,15 +12,15 @@ import { FirebaseService } from '../../../services/firebase.service';
   styleUrl: './song-view.component.scss'
 })
 export class SongViewComponent {
+  @Input() columnsCount = 1;
   fireBaseService = inject(FirebaseService);
   songArr: string[] = [];
   song = this.fireBaseService.selectedSong;
 
-
 constructor() {
 effect(() => {
   this.songArr = this.song()?.text.split('\n') || [];
-  console.log(this.songArr);
+  console.log('columnsCount', this.columnsCount);
 })
 }
 

@@ -1,7 +1,7 @@
 <div class="main">
   <app-toolbar (toggleOne)="nav1.toggle()" (toggleTwo)="nav2.toggle()"></app-toolbar>
   <mat-sidenav-container class="container"  [style.marginTop.px]="height">
-      <mat-sidenav #nav1 [fixedTopGap]="height" class="sidenav" opened mode="side">
+      <mat-sidenav [opened]="!isPhoneviewed" #nav1 [fixedTopGap]="height" class="sidenav" opened mode="side">
         <mat-toolbar class="subHeader">
           <button (click)="openAddSong()" mat-raised-button color="primary">Dodaj</button>
         </mat-toolbar>
@@ -10,7 +10,7 @@
         }
 
       </mat-sidenav>
-      <mat-sidenav #nav2 [fixedTopGap]="height" class="sidenav" opened mode="side" position="end">
+      <mat-sidenav #nav2 [fixedTopGap]="height" class="sidenav" [opened]="!isPhoneviewed" mode="side" position="end">
         <mat-toolbar class="subHeader">
            <button mat-raised-button color="primary">Drukuj</button>
         </mat-toolbar>

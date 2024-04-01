@@ -16,6 +16,7 @@ import Dexie, { Observable, liveQuery } from 'dexie';
 import { SongRes } from '../../models/song.model';
 import { CommonModule } from '@angular/common';
 import { DbService } from '../../services/db.service';
+import { BreakpointObserver,Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
     selector: 'app-main-screen',
@@ -28,14 +29,25 @@ import { DbService } from '../../services/db.service';
 export class MainScreenComponent implements OnInit{
 dialog = inject(MatDialog);
 firebaseService = inject(FirebaseService);
+public responsive = inject(BreakpointObserver);
 db = inject(DbService);
 height = 56;
 songs = this.firebaseService.songs;
 songsFromDb = this.db.songsDb;
+isPhoneviewed = false;
 
 ngOnInit(){
  this.firebaseService.getAllSongs().subscribe();
  this.db.getAllList().subscribe(list => this.db.saveSongsDb(list));
+ this.responsive.observe(Breakpoints.HandsetPortrait)
+ .subscribe(result => {
+ this.isPhoneviewed = false;
+ if (result.matches) {
+ this.isPhoneviewed = true;
+ }
+})
+
+ 
 }
 
 openAddSong() {

@@ -1,8 +1,13 @@
 @if (song()) {
+    <div class="song">
+        <mat-icon matListItemIcon (click)="changeColumnsCount()">view_column</mat-icon>
+        <app-song-view [columnsCount]="columnsCount()"></app-song-view>
+    <div class="song__actions">
+        <button (click)="removeSong()" mat-raised-button color="warn">Usuń</button>
+        <button (click)="editSong()" mat-raised-button color="primary">Edytuj</button>
+    </div>
 
-    <app-song-view></app-song-view>
-
-    <button (click)="removeSong()" mat-raised-button color="primary">Usuń</button>
-    <button (click)="editSong()" mat-raised-button color="primary">Edytuj</button>
+    </div>
+   
 }
 

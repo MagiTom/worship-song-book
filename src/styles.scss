@@ -1,4 +1,109 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@include mat.core();
+
+$bright-navy-blue-palette: (
+  50: #e6f0ee,
+  100: #c1dad5,
+  200: #9ec3ba,
+  300: #82aba1,
+  400: #73998f,
+  500: #63897e,
+  600: #5d7c72,
+  700: #546d64,
+  800: #4b5d57,
+  900: #3b423f,
+  A100: #c1dad5,
+  A200: #9ec3ba,
+  A400: #73998f,
+  A700: #546d64,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+$gainsboro-palette: (
+  50: #f9f9fa,
+  100: #f3f3f4,
+  200: #ebebec,
+  300: #dcdcdd,
+  400: #b9b9ba,
+  500: #99999a,
+  600: #707071,
+  700: #5d5d5e,
+  800: #3e3e3f,
+  900: #1d1d1e,
+  A100: #f5f5f5,
+  A200: #eaeaeb,
+  A400: #d6d6d7,
+  A700: #838386,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: white,
+  )
+);
+$crimson-palette: (
+  50: #f6dfe2,
+  100: #e8aeb7,
+  200: #d87a88,
+  300: #c8455c,
+  400: #bb193e,
+  500: #ae0023,
+  600: #a00023,
+  700: #8e0022,
+  800: #7c0020,
+  900: #5c001c,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+$bluesky-primary: mat.define-palette($bright-navy-blue-palette, 700, 300, 900);
+$bluesky-accent: mat.define-palette($gainsboro-palette, 300, 100, 500);
+$bluesky-warn: mat.define-palette($crimson-palette, 700);
+
+$bluesky-theme: mat.define-light-theme((
+  color: (
+    primary: $bluesky-primary,
+    accent: $bluesky-accent,
+    warn: $bluesky-warn,
+  )
+));
+
+@include mat.all-component-themes($bluesky-theme);
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// https://levelup.gitconnected.com/defining-your-own-theme-in-angular-material-8a4a6ffad400

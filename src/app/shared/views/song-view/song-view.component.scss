@@ -10,11 +10,13 @@
     }
 
     &__text {
-        columns: 2; /* Podział treści na dwie kolumny */
+        columns: 1; /* Podział treści na dwie kolumny */
         column-gap: 20px; /* Odstęp między kolumnami */
       }
       
       &__text pre {
+        font-family: 'Roboto';
+        font-size: 16px;
         margin: 0; /* Usunięcie domyślnego marginesu */
       }
 }

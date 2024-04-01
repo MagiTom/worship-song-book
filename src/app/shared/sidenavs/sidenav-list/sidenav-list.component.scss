@@ -1,5 +1,27 @@
 @import '../../../../styles/variables.scss';
 
+
 .list{
     margin-top: $toolbarHeight;
+}
+.mat-mdc-list-item.mdc-list-item--with-leading-avatar.mdc-list-item--with-one-line, .mat-mdc-list-item.mdc-list-item--with-leading-checkbox.mdc-list-item--with-one-line, .mat-mdc-list-item.mdc-list-item--with-leading-icon.mdc-list-item--with-one-line{
+    height: fit-content;
+    padding: .5em;
+    cursor: pointer;
+    &:hover{
+        background-color: $hoverColor;
+        transition: 200ms;
+       }
+}
+
+
+.mdc-list-item--with-leading-icon .mdc-list-item__start{
+   margin-right: .5em;
+   margin-left: .2em;
+   cursor: pointer;
+
+   &:hover{
+    background-color: darken($color: $hoverColor, $amount: 7);
+    border-radius: 50%;
+   }
 }

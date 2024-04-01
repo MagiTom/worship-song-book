@@ -1,0 +1,13 @@
+@mixin breakpoint($point) {
+    @if $point == XSmall {
+      @media (max-width: 599.98px) { @content; }
+    }
+    @if $point == Small {
+      @media (min-width: 600px) { @content; }
+    }
+    @if $point == Medium {
+      @media (min-width: 960px) { @content; }
+    }
+  }
+
+//   https://material.angular.io/cdk/layout/overview
