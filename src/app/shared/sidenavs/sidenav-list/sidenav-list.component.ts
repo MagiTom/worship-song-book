@@ -18,7 +18,7 @@ import { MatDividerModule } from '@angular/material/divider';
 export class SidenavListComponent {
 db = inject(DbService);
 private router = inject(Router);
-@Input({required: true}) songs!: SongRes[] | SongDb[];
+@Input({required: true}) songs!: SongRes[];
 @Input() printMode: boolean = false;
 
 goToSong(id: string, ev: any) {
@@ -28,7 +28,7 @@ goToSong(id: string, ev: any) {
 
   addToDB(song: SongRes, ev: any) {
     ev.stopPropagation();
-    this.db.addToDB(song);
+    this.db.addToDB(song).then();
 }
 
 removeFromDB(song: any, ev: any) {

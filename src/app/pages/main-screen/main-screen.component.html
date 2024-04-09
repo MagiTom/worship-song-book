@@ -12,9 +12,10 @@
       </mat-sidenav>
       <mat-sidenav #nav2 [fixedTopGap]="height" class="sidenav" [opened]="!isPhoneviewed" mode="side" position="end">
         <mat-toolbar class="subHeader">
-           <button mat-raised-button color="primary">Drukuj</button>
+           <button mat-raised-button color="primary" (click)="printSongs()">Drukuj</button>
         </mat-toolbar>
-        <app-sidenav-list [printMode]="true" [songs]="songsFromDb()"/>
+        <app-sidenav-draggable [songs]="songsFromDb()"/>
+        <app-print class="hide" [songs]="songsFromDb()"></app-print>
       </mat-sidenav>
       <mat-sidenav-content class="content">
         <router-outlet />

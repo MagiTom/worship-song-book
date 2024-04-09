@@ -17,6 +17,9 @@ import { SongRes } from '../../models/song.model';
 import { CommonModule } from '@angular/common';
 import { DbService } from '../../services/db.service';
 import { BreakpointObserver,Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { SidenavDraggableComponent } from "../../shared/sidenavs/sidenav-draggable/sidenav-draggable.component";
+import { NgxPrintService, PrintOptions } from 'ngx-print';
+import { PrintComponent } from "../../shared/views/print/print.component";
 
 @Component({
     selector: 'app-main-screen',
@@ -24,11 +27,12 @@ import { BreakpointObserver,Breakpoints, BreakpointState } from '@angular/cdk/la
     templateUrl: './main-screen.component.html',
     styleUrl: './main-screen.component.scss',
     imports: [ToolbarComponent, MatSidenavModule, SidenavListComponent, RouterOutlet,
-        MatToolbarModule, MatIconModule, MatListModule, MatButtonModule, CommonModule]
+        MatToolbarModule, MatIconModule, MatListModule, MatButtonModule, CommonModule, SidenavDraggableComponent, PrintComponent]
 })
 export class MainScreenComponent implements OnInit{
 dialog = inject(MatDialog);
 firebaseService = inject(FirebaseService);
+printService = inject(NgxPrintService);
 public responsive = inject(BreakpointObserver);
 db = inject(DbService);
 height = 56;
@@ -38,7 +42,11 @@ isPhoneviewed = false;
 
 ngOnInit(){
  this.firebaseService.getAllSongs().subscribe();
- this.db.getAllList().subscribe(list => this.db.saveSongsDb(list));
+ this.db.songList$
+ .subscribe(list => {
+  console.log('list', list)
+  this.db.saveSongsDb(list)
+ });
  this.responsive.observe(Breakpoints.HandsetPortrait)
  .subscribe(result => {
  this.isPhoneviewed = false;
@@ -52,12 +60,23 @@ ngOnInit(){
 
 openAddSong() {
     const dialogRef = this.dialog.open(AddModalComponent, {
-        // data: {name: this.name, animal: this.animal},
+      width: '80%',
+      height: '80%',
       });
   
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
         // this.animal = result;
       });
+    }
+
+    printSongs() {
+      const customPrintOptions: PrintOptions = new PrintOptions({
+          printSectionId: 'print-section',
+          useExistingCss: true,
+          printTitle: 'Worship Book'
+          // Add any other print options as needed
+      });
+      this.printService.print(customPrintOptions)
     }
 }

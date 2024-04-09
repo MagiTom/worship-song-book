@@ -1,30 +1,36 @@
-import { Component, Input, OnInit, effect, inject } from '@angular/core';
-import { SongRes } from '../../../models/song.model';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, Signal, effect, inject } from '@angular/core';
+import { SongDbRes, SongRes } from '../../../models/song.model';
 import { CommonModule } from '@angular/common';
 import { FirebaseService } from '../../../services/firebase.service';
-import { DbService } from '../../../services/db.service';
+import * as Transposer from 'chord-transposer';
+
+import { transpose, Chord, KeySignatures } from 'chord-transposer';
 
 @Component({
   selector: 'app-song-view',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   templateUrl: './song-view.component.html',
   styleUrl: './song-view.component.scss'
 })
-export class SongViewComponent {
+export class SongViewComponent{
+  cdr = inject(ChangeDetectorRef);
   @Input() columnsCount = 1;
+  @Input({required: true}) transpose!: number;
+  @Input({required: true}) set song(value: SongRes | SongDbRes){
+    this.songEl = value;
+    this.songArr = this.songEl?.text.split('\n') || [];
+    console.log('songEl', value)
+  };
+  songEl!: SongRes | SongDbRes;
   fireBaseService = inject(FirebaseService);
-  songArr: string[] = [];
-  song = this.fireBaseService.selectedSong;
+  songArr!: string[];
+  test = 0;
 
 constructor() {
-effect(() => {
-  this.songArr = this.song()?.text.split('\n') || [];
-  console.log('columnsCount', this.columnsCount);
-})
+
 }
-
-
 
 checkIfChords(verse:string): boolean{
   const regex = /\[(.*?)\]/g;
@@ -32,9 +38,10 @@ checkIfChords(verse:string): boolean{
 }
 
 removeSquereBrackets(verse:string){
-  if(this.checkIfChords(verse)){
-    return verse.replace(/\[(.*?)\]/g, '$1');
-  }
-  return verse;
+const song = this.songEl as SongDbRes;
+const chords = verse.replace(/\[(.*?)\]/g, '$1');
+console.log('verse', verse)
+console.log('this.transpose', this.transpose)
+  return Transposer.transpose(chords).up(this.transpose);  
 }
 }

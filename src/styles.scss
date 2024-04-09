@@ -93,6 +93,7 @@ $bluesky-primary: mat.define-palette($bright-navy-blue-palette, 700, 300, 900);
 $bluesky-accent: mat.define-palette($gainsboro-palette, 300, 100, 500);
 $bluesky-warn: mat.define-palette($crimson-palette, 700);
 
+
 $bluesky-theme: mat.define-light-theme((
   color: (
     primary: $bluesky-primary,

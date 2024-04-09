@@ -1,6 +1,9 @@
 <h2 mat-dialog-title>{{song ? 'Edytuj utwór' : 'Dodaj utwór'}}</h2>
 <mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <p>Format zapisu utworów: <br />
+    [C E G] <br />
+    Wers piosenki
+  </p>
   <form class="form" [formGroup]="songForm">
   <mat-form-field>
     <mat-label>Tytuł</mat-label>
@@ -8,7 +11,7 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Tekst</mat-label>
-    <textarea formControlName="text" matInput></textarea>
+    <textarea cdkTextareaAutosize formControlName="text" matInput></textarea>
   </mat-form-field>
 </form>
 </mat-dialog-content>

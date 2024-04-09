@@ -1,0 +1,12 @@
+<mat-list role="list" class="list" cdkDropList (cdkDropListDropped)="drop($event)">
+    @for (song of songs; track song.id) {
+      <mat-list-item cdkDrag role="listitem" (click)="goToSong(song.songId, $event)">
+          <mat-icon matListItemIcon (click)="removeFromDB(song, $event)">remove</mat-icon>
+      <div matListItemTitle>{{song.title}}</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    }
+  
+    </mat-list>
+  
+  

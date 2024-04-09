@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, Signal, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Signal, effect, inject, signal } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
-import { SongDb, SongRes } from '../../models/song.model';
+import { SongDb, SongDbRes, SongRes } from '../../models/song.model';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -12,15 +12,18 @@ import { ConfirmationModalComponent } from '../../shared/modals/confirmation-mod
 import { SongViewComponent } from "../../shared/views/song-view/song-view.component";
 import { DbService } from '../../services/db.service';
 import { MatIcon } from '@angular/material/icon';
+import { TransposerComponent } from "../../shared/transposer/transposer.component";
 
 @Component({
     selector: 'app-song',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     templateUrl: './song.component.html',
     styleUrl: './song.component.scss',
-    imports: [CommonModule, MatButtonModule, SongViewComponent, MatIcon]
+    imports: [CommonModule, MatButtonModule, SongViewComponent, MatIcon, TransposerComponent]
 })
 export class SongComponent implements OnInit{
+
   db = inject(DbService);
   dialog = inject(MatDialog);
   id = '';
@@ -28,11 +31,14 @@ export class SongComponent implements OnInit{
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   song = this.firebaseService.selectedSong;
-  songDb!: SongDb | undefined;
+  songDb!: SongDbRes | undefined;
   columnsCount = signal(1);
+  transpose = this.db.transpose;
 
   constructor() {
-
+    effect(()=>{
+      this.songDb = this.checkIfSongInDb();
+    })
   }
 
   ngOnInit(): void {
@@ -47,7 +53,15 @@ export class SongComponent implements OnInit{
 }
 
 checkIfSongInDb(){
-  return this.db.songsDb().find(item => this.song()?.id === item.id);
+  console.log('songsDb', this.db.songsDb().find(item => this.song()?.id === item.songId));
+  return this.db.songsDb().find(item => this.song()?.id === item.songId);
+}
+
+getTransposeCount($event: number) {
+   this.db.setTranspose($event);
+   if(this.songDb){
+    this.db.updateDB({...this.songDb})
+  }
 }
 
 getSong(){
@@ -58,7 +72,8 @@ getSong(){
     } else {
       this.columnsCount.set(this.db.columns());
     }
-    console.log('columns', this.columnsCount)
+    this.db.setTranspose(this.songDb?.transpose || 0);
+    console.log('songDb', this.songDb)
   });
 }
 
@@ -79,6 +94,8 @@ getSong(){
     console.log('song', this.song())
     const dialogRef = this.dialog.open(AddModalComponent, {
       data: {song: this.song()},
+      width: '80%',
+      height: '80%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -94,6 +111,5 @@ getSong(){
         } else {
           this.db.updateDB({...this.songDb, columns: this.columnsCount()})
         }
-        console.log('columnsxxx', this.columnsCount())
      }
 }

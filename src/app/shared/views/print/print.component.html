@@ -1,0 +1,10 @@
+<div class="print" id="print-section">
+    <div class="print__content">
+    @for (song of songs; track song.id) {
+            <app-song-view [transpose]="song.transpose" [song]="song" [columnsCount]="song.columns"></app-song-view>
+        <mat-divider class="print__item" />
+    }
+    </div>
+
+</div>
+
