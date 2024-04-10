@@ -1,0 +1,72 @@
+@import '../../../styles/breakpoints.scss';
+
+.login{
+    height: 100%;
+    .img{
+        width: 100%;
+        height: 40%;
+        background-image: url('../../../assets/guitar.jpg');
+        background-position: bottom;
+        background-size: cover;
+        position: relative;
+    }
+    &__info {
+        background-color: #ffffff1a;
+        border-radius: 5px;
+        bottom: 2em;
+        color: #fff;
+        font-weight: lighter;
+        left: 50%;
+        opacity: .7;
+        position: absolute;
+        text-align: center;
+        text-transform: uppercase;
+        transform: translateX(-50%);
+        width: 85%;
+    }
+    h5{
+        font-size: 1.5rem;
+        padding: 1em 1.5em;
+        margin: 0;
+    }
+
+    &__form{
+        margin-top: 2em;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        width: 80%;
+    }
+    h4{
+        margin-top: 2em;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 2.125rem;
+        letter-spacing: 0.00735em;
+        color: #0000008a;
+    }
+}
+
+@include breakpoint(Medium){
+    .login{
+        &__form{
+            width: 60%;
+        }
+        display: flex;
+        .img, .col{
+            height: 100%;
+            width: 50%;
+        }
+        .card{
+            flex: 1;
+            margin: auto;
+        }
+        h4{
+            margin-bottom: 1em;
+        }
+        h5{
+            padding: 2em 2.5em;
+            margin: 0;
+        }
+    }
+}

@@ -1,0 +1,33 @@
+<div class="login">
+    <div class="login__col img">
+        <div class="login__info">
+            <h5>śpiewnik gitarowy</h5>
+        </div>
+    </div>
+    <div class="login__col card">
+        <h4>logowanie</h4>
+        <div class="login__form">
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput
+                     placeholder="pat@example.com"
+                     [formControl]="email"
+                     (blur)="updateErrorMessage()"
+                     required>
+              @if (email.invalid) {
+                <mat-error>{{errorMessage}}</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Hasło</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+              <button mat-flat-button color="primary">Zaloguj się</button>
+          </div>
+        
+    </div>
+</div>
+

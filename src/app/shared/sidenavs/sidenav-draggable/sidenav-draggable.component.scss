@@ -1,2 +1,5 @@
 @import '../sidenav-list/sidenav-list.component.scss';
 
+.mat-mdc-list-item.mdc-list-item--with-leading-avatar.mdc-list-item--with-one-line, .mat-mdc-list-item.mdc-list-item--with-leading-checkbox.mdc-list-item--with-one-line, .mat-mdc-list-item.mdc-list-item--with-leading-icon.mdc-list-item--with-one-line{
+    cursor: move;
+}
