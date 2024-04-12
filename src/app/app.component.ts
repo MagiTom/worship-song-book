@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { environment } from '../environments/environment.development';
-import { NgxPrintModule } from 'ngx-print';
 import { FirebaseAppModule } from '@angular/fire/app';
+import { RouterOutlet } from '@angular/router';
+import { NgxPrintModule } from 'ngx-print';
 
 @Component({
   selector: 'app-root',

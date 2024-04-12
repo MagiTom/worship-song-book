@@ -9,7 +9,6 @@ export const authGuard: any = () => {
     const auth = inject(Auth);
 
    return auth.onAuthStateChanged((user) => {
-        console.log('user', user)
         if (!user?.email) {
             router.navigate(['login']);
             return false;
@@ -25,7 +24,6 @@ export const authGuard: any = () => {
     const auth = inject(Auth);
 
    return auth.onAuthStateChanged((user) => {
-        console.log('user', user)
         if (user?.email) {
             router.navigate(['']);
             return false;

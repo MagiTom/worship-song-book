@@ -1,12 +1,12 @@
-import { Component, Input, inject } from '@angular/core';
-import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import { SongDb, SongRes } from '../../../models/song.model';
-import { Router } from '@angular/router';
-import { DbService } from '../../../services/db.service';
 import { CommonModule } from '@angular/common';
+import { Component, Input, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { Router } from '@angular/router';
+import { SongRes } from '../../../models/song.model';
+import { DbService } from '../../../services/db.service';
 import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({

@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, Signal, effect, inject } from '@angular/core';
-import { SongDbRes, SongRes } from '../../../models/song.model';
 import { CommonModule } from '@angular/common';
-import { FirebaseService } from '../../../services/firebase.service';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, inject } from '@angular/core';
 import * as Transposer from 'chord-transposer';
+import { SongDbRes, SongRes } from '../../../models/song.model';
+import { FirebaseService } from '../../../services/firebase.service';
 
-import { transpose, Chord, KeySignatures } from 'chord-transposer';
 
 @Component({
   selector: 'app-song-view',
@@ -21,7 +20,6 @@ export class SongViewComponent{
   @Input({required: true}) set song(value: SongRes | SongDbRes){
     this.songEl = value;
     this.songArr = this.songEl?.text.split('\n') || [];
-    console.log('songEl', value)
   };
   songEl!: SongRes | SongDbRes;
   fireBaseService = inject(FirebaseService);
@@ -40,8 +38,6 @@ checkIfChords(verse:string): boolean{
 removeSquereBrackets(verse:string){
 const song = this.songEl as SongDbRes;
 const chords = verse.replace(/\[(.*?)\]/g, '$1');
-console.log('verse', verse)
-console.log('this.transpose', this.transpose)
   return Transposer.transpose(chords).up(this.transpose);  
 }
 }

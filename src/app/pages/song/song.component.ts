@@ -1,18 +1,16 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, Signal, effect, inject, signal } from '@angular/core';
-import { FirebaseService } from '../../services/firebase.service';
-import { SongDb, SongDbRes, SongRes } from '../../models/song.model';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit, effect, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SongDbRes } from '../../models/song.model';
+import { DbService } from '../../services/db.service';
+import { FirebaseService } from '../../services/firebase.service';
 import { AddModalComponent } from '../../shared/modals/add-modal/add-modal.component';
 import { ConfirmationModalComponent } from '../../shared/modals/confirmation-modal/confirmation-modal.component';
-import { SongViewComponent } from "../../shared/views/song-view/song-view.component";
-import { DbService } from '../../services/db.service';
-import { MatIcon } from '@angular/material/icon';
 import { TransposerComponent } from "../../shared/transposer/transposer.component";
+import { SongViewComponent } from "../../shared/views/song-view/song-view.component";
 
 @Component({
     selector: 'app-song',
@@ -45,7 +43,6 @@ export class SongComponent implements OnInit{
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.id = params['id'];
-          console.log('iddd', this.id)
           this.getSong();
       }
   })
@@ -53,7 +50,6 @@ export class SongComponent implements OnInit{
 }
 
 checkIfSongInDb(){
-  console.log('songsDb', this.db.songsDb().find(item => this.song()?.id === item.songId));
   return this.db.songsDb().find(item => this.song()?.id === item.songId);
 }
 
@@ -73,7 +69,6 @@ getSong(){
       this.columnsCount.set(this.db.columns());
     }
     this.db.setTranspose(this.songDb?.transpose || 0);
-    console.log('songDb', this.songDb)
   });
 }
 
@@ -91,7 +86,6 @@ getSong(){
   }
 
   editSong() {
-    console.log('song', this.song())
     const dialogRef = this.dialog.open(AddModalComponent, {
       data: {song: this.song()},
       width: '80%',
@@ -99,7 +93,6 @@ getSong(){
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.getSong();
     });
      }

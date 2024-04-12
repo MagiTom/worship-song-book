@@ -1,24 +1,22 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { ToolbarComponent } from "../../shared/toolbar/toolbar.component";
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { SidenavListComponent } from "../../shared/sidenavs/sidenav-list/sidenav-list.component";
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MatDialog,
+} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
-import {
-    MatDialog,
-  } from '@angular/material/dialog';
-import { AddModalComponent } from '../../shared/modals/add-modal/add-modal.component';
-import { FirebaseService } from '../../services/firebase.service';
-import Dexie, { Observable, liveQuery } from 'dexie';
-import { SongRes } from '../../models/song.model';
-import { CommonModule } from '@angular/common';
-import { DbService } from '../../services/db.service';
-import { BreakpointObserver,Breakpoints, BreakpointState } from '@angular/cdk/layout';
-import { SidenavDraggableComponent } from "../../shared/sidenavs/sidenav-draggable/sidenav-draggable.component";
 import { NgxPrintService, PrintOptions } from 'ngx-print';
+import { DbService } from '../../services/db.service';
+import { FirebaseService } from '../../services/firebase.service';
+import { AddModalComponent } from '../../shared/modals/add-modal/add-modal.component';
+import { SidenavDraggableComponent } from "../../shared/sidenavs/sidenav-draggable/sidenav-draggable.component";
+import { SidenavListComponent } from "../../shared/sidenavs/sidenav-list/sidenav-list.component";
+import { ToolbarComponent } from "../../shared/toolbar/toolbar.component";
 import { PrintComponent } from "../../shared/views/print/print.component";
 
 @Component({
@@ -75,7 +73,6 @@ openAddSong() {
           printSectionId: 'print-section',
           useExistingCss: true,
           printTitle: 'Worship Book'
-          // Add any other print options as needed
       });
       this.printService.print(customPrintOptions)
     }

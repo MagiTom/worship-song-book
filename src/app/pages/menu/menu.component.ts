@@ -1,15 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { SongRes } from '../../models/song.model';
 import { DbService } from '../../services/db.service';
 import { FirebaseService } from '../../services/firebase.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { from, of } from 'rxjs';
-import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-menu',
@@ -27,7 +25,6 @@ export class MenuComponent {
 
   constructor() {
     toObservable(this.firebaseService.songs).subscribe(res =>{
-      console.log('dfdfd', res)
       this.songs = res;
       this.songsCopy = JSON.parse(JSON.stringify(this.songs));
     });

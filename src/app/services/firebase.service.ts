@@ -1,12 +1,10 @@
-import { Injectable, Signal, inject, signal } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, docData, getDocs, setDoc, updateDoc } from '@angular/fire/firestore';
-import firebase from 'firebase/app';
-import 'firebase/firestore'; 
-import { Observable, tap, map, of, filter, catchError } from 'rxjs';
-import { Song, SongRes } from '../models/song.model';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { AlertComponent } from '../shared/modals/alert/alert.component';
+import { Injectable, inject, signal } from '@angular/core';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, docData, setDoc, updateDoc } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import 'firebase/firestore';
+import { Observable, catchError, map, of, tap } from 'rxjs';
+import { Song, SongRes } from '../models/song.model';
+import { AlertComponent } from '../shared/modals/alert/alert.component';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +23,7 @@ export class FirebaseService {
   getAllSongs(): Observable<any> {
     return collectionData(collection(this.firestore, this.dbPath))
     .pipe(
+      map(res => res.sort((a: any, b: any) => a.title.localeCompare(b.title))),
       tap(res => this.songsSig.set(res as any)),
       catchError((err: any) => {
         this.openSnackBar(err.message)

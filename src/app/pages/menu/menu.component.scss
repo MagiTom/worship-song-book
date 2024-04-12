@@ -15,8 +15,8 @@
         align-items: center;
     }
     &__list{
-        columns: 1; /* Podział treści na dwie kolumny */
-        column-gap: 20px; /* Odstęp między kolumnami */
+        columns: 1; 
+        column-gap: 20px; 
     }
     p{
         margin: 0;

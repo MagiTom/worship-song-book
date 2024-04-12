@@ -1,3 +1,4 @@
+import { CdkDrag, CdkDragDrop, CdkDropList, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -5,9 +6,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Router } from '@angular/router';
-import { SongRes, SongDb, SongDbRes } from '../../../models/song.model';
+import { SongDbRes } from '../../../models/song.model';
 import { DbService } from '../../../services/db.service';
-import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray, DragDropModule} from '@angular/cdk/drag-drop';
 import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({
@@ -33,11 +33,7 @@ export class SidenavDraggableComponent {
     this.db.removeFromDB(song);
   }
   drop(event: CdkDragDrop<string[]>) {
-    console.log('drop', event)
     moveItemInArray(this.songs, event.previousIndex, event.currentIndex)
-    console.log('songs', this.songs)
-    console.log('event.currentIndex)', event.currentIndex)
-    console.log('event.previousIndex', event.previousIndex);
     this.db.reorderDb(this.songs)
     }
 }

@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
   Auth,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  UserCredential,
-
+  signInWithEmailAndPassword
 } from '@angular/fire/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import { AlertComponent } from '../shared/modals/alert/alert.component';
 
 export interface User{
@@ -32,7 +28,6 @@ export class AuthService {
         uid: user?.uid || '', 
       }
 
-      console.log('user', userData);
       this.user.next(userData);
     });
 
@@ -46,7 +41,6 @@ export class AuthService {
     signInWithEmailAndPassword(this.afAuth, email, password)
     .then(()=>  this.router.navigate(['']))
     .catch(err =>{
-      console.log('err', err)
       this.openSnackBar('Nieprawidłowy login lub hasło!');
     })
   }
@@ -57,8 +51,6 @@ export class AuthService {
         this.router.navigate(['login']);
       })
       .catch((err) => {
-        // An error occurred
-        console.log('err', err)
         this.openSnackBar(err?.message);
       });
   }

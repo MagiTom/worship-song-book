@@ -1,9 +1,9 @@
 import { Injectable, inject, signal } from '@angular/core';
-import Dexie, { Observable, liveQuery } from 'dexie';
-import { SongDb, SongDbRes, SongRes } from '../models/song.model';
-import { db, SongList } from '../db';
-import { AlertComponent } from '../shared/modals/alert/alert.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Dexie, { liveQuery } from 'dexie';
+import { db } from '../db';
+import { SongDb, SongDbRes, SongRes } from '../models/song.model';
+import { AlertComponent } from '../shared/modals/alert/alert.component';
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +59,6 @@ reorderDb(songs: SongDbRes[]){
     text: song.text,
     songId: song.songId,
     columns: song.columns}))
-  // console.log('songsUP', songsUP)
   db.songItems.clear();
   db.songItems
   .bulkAdd(songsUP)
