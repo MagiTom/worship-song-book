@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { SongRes, SongDb, SongDbRes } from '../../../models/song.model';
 import { DbService } from '../../../services/db.service';
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray, DragDropModule} from '@angular/cdk/drag-drop';
+import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({
   selector: 'app-sidenav-draggable',
@@ -17,7 +18,7 @@ import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray, DragDropModule} from
   styleUrl: './sidenav-draggable.component.scss'
 })
 export class SidenavDraggableComponent {
-
+  firebaseService = inject(FirebaseService);
   db = inject(DbService);
   private router = inject(Router);
   @Input({required: true}) songs!: SongDbRes[];

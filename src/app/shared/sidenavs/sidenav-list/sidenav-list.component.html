@@ -1,6 +1,6 @@
 <mat-list role="list" class="list">
   @for (song of songs; track song.id) {
-    <mat-list-item role="listitem" (click)="goToSong(song.id, $event)">
+    <mat-list-item [ngClass]="song.id === firebaseService.selectedSong()?.id ? 'selected' : ''" role="listitem" (click)="goToSong(song.id, $event)">
         <mat-icon matListItemIcon (click)="addToDB(song, $event)">add</mat-icon>
     <div matListItemTitle>{{song.title}}</div>
   </mat-list-item>

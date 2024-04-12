@@ -108,3 +108,8 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 // https://levelup.gitconnected.com/defining-your-own-theme-in-angular-material-8a4a6ffad400
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface{
+  color: map-get($crimson-palette, 700) !important;
+  background-color: white !important;
+}

@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { DbService } from '../../../services/db.service';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
+import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({
   selector: 'app-sidenav-list',
@@ -17,6 +18,7 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class SidenavListComponent {
 db = inject(DbService);
+firebaseService = inject(FirebaseService);
 private router = inject(Router);
 @Input({required: true}) songs!: SongRes[];
 @Input() printMode: boolean = false;
@@ -29,10 +31,5 @@ goToSong(id: string, ev: any) {
   addToDB(song: SongRes, ev: any) {
     ev.stopPropagation();
     this.db.addToDB(song).then();
-}
-
-removeFromDB(song: any, ev: any) {
-  ev.stopPropagation();
-  this.db.removeFromDB(song);
 }
 }

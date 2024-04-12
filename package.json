@@ -25,7 +25,7 @@
     "angularfire2": "^5.4.2",
     "chord-transposer": "^3.0.9",
     "dexie": "^4.0.1",
-    "firebase": "^7.24.0",
+    "firebase": "^10.11.0",
     "ngx-print": "^1.5.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

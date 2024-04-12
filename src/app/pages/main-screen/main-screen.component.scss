@@ -12,13 +12,18 @@
     right: 0;
 }
 
-.content{
-    padding-top: 1rem;
-}
-
 .subHeader{
     position: absolute;
-    background-color:#ebebec;
+    background-color:white;
+    padding: 0;
+
+    .btn{
+        margin: 0 .5em;
+    }
+}
+.subHeader{
+   display: flex;
+   justify-content: space-between;
 }
 
 .sidenav{

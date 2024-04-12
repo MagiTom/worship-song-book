@@ -6,11 +6,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { merge } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatFormFieldModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatIconModule, MatButtonModule],
+  imports: [MatFormFieldModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
+     MatIconModule, MatButtonModule, MatSnackBarModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -20,7 +24,7 @@ export class LoginComponent {
   hide = true;
   errorMessage = '';
 
-  constructor() {
+  constructor(private authService: AuthService) {
     merge(this.email.statusChanges, this.email.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessage());
@@ -35,4 +39,11 @@ export class LoginComponent {
       this.errorMessage = '';
     }
   }
+
+  login() {
+    if(this.email.valid && this.password.valid){
+      this.authService.login(this.email.value || '', this.password.value || '');
+    }
+  
+    }
 }

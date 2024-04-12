@@ -1,3 +1,5 @@
+@import '../../../../styles/breakpoints.scss';
+
 .chord{
     font-weight: bold;
 }
@@ -8,6 +10,8 @@
     &__title{
         text-align: center;
         text-transform: uppercase;
+        font-size: 1rem;
+        margin-bottom: .5em;
     }
 
     &__text {
@@ -17,7 +21,18 @@
       
       &__text pre {
         font-family: 'Roboto';
-        font-size: 16px;
-        margin: 0; /* Usunięcie domyślnego marginesu */
+        font-size: 13px;
+       margin: 0; /* Usunięcie domyślnego marginesu */
       }
+}
+
+@include breakpoint(Medium){
+  .song{
+    &__text pre {
+      font-size: 16px;
+    }
+    &__title{
+      font-size: 1.2rem;
+  }
+  }
 }

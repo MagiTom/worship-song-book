@@ -1,0 +1,9 @@
+@import '../../../../styles.scss';
+.mat-mdc-snack-bar-container .mdc-snackbar__surface{
+
+    background-color: white !important;
+  }
+
+  .alert{
+    color: map-get($crimson-palette, 700) !important;
+  }

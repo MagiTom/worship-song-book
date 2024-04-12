@@ -2,7 +2,7 @@
     <div class="song">
         <div class="song__changes">
             <app-transposer [value]="transpose()" (getCount)="getTransposeCount($event)"></app-transposer>
-            <mat-icon matListItemIcon (click)="changeColumnsCount()">view_column</mat-icon>
+           <button mat-mini-fab (click)="changeColumnsCount()"><mat-icon>view_column</mat-icon></button> 
         </div>
  
         <app-song-view [transpose]="transpose()" [song]="songDb || song" [columnsCount]="columnsCount()"></app-song-view>
