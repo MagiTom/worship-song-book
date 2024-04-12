@@ -1,0 +1,22 @@
+<div class="menu">
+    <h3>MENU</h3>
+    <div class="menu__filter">
+        <mat-form-field>
+            <mat-label>Szukaj</mat-label>
+            <input matInput (input)="setFilter($event)">
+           
+              <mat-icon matIconPrefix>search</mat-icon>
+          
+          </mat-form-field>
+    </div>
+    <div class="menu__list">
+        @for (song of songs; track song.id) {
+        <div class="menu__item">
+            <button (click)="addToDB(song, $event)" mat-icon-button>
+                <mat-icon>add</mat-icon>
+              </button>
+        <p (click)="goToSong(song.id, $event)" matListItemTitle>{{song.title}}</p>
+        </div>
+    }
+    </div>
+</div>

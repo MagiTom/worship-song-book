@@ -9,5 +9,13 @@
 }
 
 .logout{
-  margin-right: 2em;
+  margin: 0 2em;
+}
+
+span{
+  cursor: pointer;
+
+  &:hover{
+    opacity: 0.8;
+  }
 }

@@ -2,9 +2,12 @@
   <button (click)="toggleOne.emit()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>Śpiewnik</span>
+  <span [routerLink]="''">Śpiewnik</span>
   
   <span class="example-spacer"></span>
+  <button [routerLink]="''" mat-icon-button>
+    <mat-icon>search</mat-icon>
+  </button>
   <button (click)="logOut()" class="logout" color="primary" mat-button>WYLOGUJ</button>
   <button (click)="toggleTwo.emit()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
     <mat-icon>menu</mat-icon>
