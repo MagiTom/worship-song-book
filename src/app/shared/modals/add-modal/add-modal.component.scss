@@ -1,8 +1,13 @@
 .form{
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
 
 h2{
     text-transform: uppercase;
+}
+
+textarea{
+    height: 100%;
 }
