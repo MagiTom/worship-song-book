@@ -8,7 +8,11 @@
   <button [routerLink]="''" mat-icon-button>
     <mat-icon>search</mat-icon>
   </button>
-  <button (click)="logOut()" class="logout" color="primary" mat-button>WYLOGUJ</button>
+  @if(isLoggin()){
+    <button (click)="logOut()" class="logout" color="primary" mat-button>WYLOGUJ</button>
+  } @else {
+    <button routerLink="/login" class="logout" color="primary" mat-button>ADMIN</button>
+  }
   <button (click)="toggleTwo.emit()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
     <mat-icon>menu</mat-icon>
   </button>

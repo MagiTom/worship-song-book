@@ -6,11 +6,23 @@
         </div>
  
         <app-song-view [transpose]="transpose()" [song]="songDb || song" [columnsCount]="columnsCount()"></app-song-view>
-    <div class="song__actions">
-        <button (click)="removeSong()" mat-raised-button color="warn">Usuń</button>
-        <button (click)="editSong()" mat-raised-button color="primary">Edytuj</button>
-    </div>
+      
 
+            @if(song?.link){
+                <div class="song__link">
+                <button (click)="openInNewTab()" mat-icon-button color="warn" aria-label="Example icon button with a menu icon">
+                    <mat-icon>youtube_searched_for</mat-icon>   
+                    </button>
+                </div>
+            }
+    
+      
+    @if (isLoggin()) {
+        <div class="song__actions">
+            <button (click)="removeSong()" mat-raised-button color="warn">Usuń</button>
+            <button (click)="editSong()" mat-raised-button color="primary">Edytuj</button>
+        </div>
+    }
     </div>
    
 }

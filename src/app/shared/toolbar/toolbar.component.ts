@@ -16,9 +16,9 @@ export class ToolbarComponent {
 private authService = inject(AuthService);
 @Output() toggleOne = new EventEmitter();
 @Output() toggleTwo = new EventEmitter();
+isLoggin = this.authService.isLoggin;
 
 logOut(){
   this.authService.logout();
 }
-
 }

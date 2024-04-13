@@ -3,7 +3,9 @@
   <mat-sidenav-container class="container"  [style.marginTop.px]="height">
       <mat-sidenav [opened]="!isPhoneviewed" #nav1 [fixedTopGap]="height" class="sidenav" opened mode="side">
         <mat-toolbar class="subHeader">
-          <button class="btn" (click)="openAddSong()" mat-flat-button color="primary">Dodaj</button>
+          @if (isLoggin()) {
+            <button class="btn" (click)="openAddSong()" mat-flat-button color="primary">Dodaj</button>
+          }
           <button (click)="nav1.toggle()" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
             <mat-icon>{{ nav1.opened ? 'keyboard_arrow_right' : 'keyboard_arrow_left'}}</mat-icon>
           </button>

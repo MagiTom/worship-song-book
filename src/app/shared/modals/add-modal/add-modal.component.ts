@@ -26,6 +26,7 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: {song: SongRes}, public dialog
 songForm = this.formBuilder.group({
   title: ['', Validators.required],
   text: ['', Validators.required],
+  link: [''],
 });
 
 ngOnInit(): void {
@@ -33,13 +34,18 @@ ngOnInit(): void {
   if(this.song){
     this.songForm.setValue({
       title: this.song.title,
-      text: this.song.text
+      text: this.song.text,
+      link: this.song?.link || ''
     })
   }
 }
 
   async submitForm() {
-    const songToSave: Song = {title: this.songForm.value.title || '', text: this.songForm.value.text || ''}
+    const songToSave: Song = {
+      title: this.songForm.value.title || '', 
+      text: this.songForm.value.text || '',
+      link: this.songForm.value.link || '',
+    }
       if(!this.song){
         this.addSong(songToSave);
       } else {

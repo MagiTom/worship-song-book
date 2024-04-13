@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import {
   Auth,
   signInWithEmailAndPassword
@@ -18,6 +18,7 @@ export interface User{
 })
 export class AuthService {
   user = new BehaviorSubject<User | null>(null);
+  isLoggin = signal(false);
   constructor(// Inject Firestore service
   private router: Router,
   private snackBar: MatSnackBar,
@@ -27,8 +28,8 @@ export class AuthService {
         email: user?.email || '', 
         uid: user?.uid || '', 
       }
-
       this.user.next(userData);
+      this.isLoggin.set(!!user);
     });
 
    }

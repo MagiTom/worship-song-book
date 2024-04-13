@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, effect, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { MatIcon } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SongDbRes } from '../../models/song.model';
 import { DbService } from '../../services/db.service';
@@ -11,6 +11,7 @@ import { AddModalComponent } from '../../shared/modals/add-modal/add-modal.compo
 import { ConfirmationModalComponent } from '../../shared/modals/confirmation-modal/confirmation-modal.component';
 import { TransposerComponent } from "../../shared/transposer/transposer.component";
 import { SongViewComponent } from "../../shared/views/song-view/song-view.component";
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-song',
@@ -18,7 +19,7 @@ import { SongViewComponent } from "../../shared/views/song-view/song-view.compon
     standalone: true,
     templateUrl: './song.component.html',
     styleUrl: './song.component.scss',
-    imports: [CommonModule, MatButtonModule, SongViewComponent, MatIcon, TransposerComponent]
+    imports: [CommonModule, MatButtonModule, SongViewComponent, MatIconModule, MatButtonModule, TransposerComponent]
 })
 export class SongComponent implements OnInit{
 
@@ -26,12 +27,14 @@ export class SongComponent implements OnInit{
   dialog = inject(MatDialog);
   id = '';
   private firebaseService = inject(FirebaseService);
+  private authService = inject(AuthService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   song = this.firebaseService.selectedSong;
   songDb!: SongDbRes | undefined;
   columnsCount = signal(1);
   transpose = this.db.transpose;
+  isLoggin = this.authService.isLoggin;
 
   constructor() {
     effect(()=>{
@@ -48,6 +51,9 @@ export class SongComponent implements OnInit{
   })
 
 }
+openInNewTab() {
+  window.open(this.song()?.link, "_blank", "noreferrer");
+};
 
 checkIfSongInDb(){
   return this.db.songsDb().find(item => this.song()?.id === item.songId);

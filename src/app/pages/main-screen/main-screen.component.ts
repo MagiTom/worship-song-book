@@ -18,6 +18,7 @@ import { SidenavDraggableComponent } from "../../shared/sidenavs/sidenav-draggab
 import { SidenavListComponent } from "../../shared/sidenavs/sidenav-list/sidenav-list.component";
 import { ToolbarComponent } from "../../shared/toolbar/toolbar.component";
 import { PrintComponent } from "../../shared/views/print/print.component";
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-main-screen',
@@ -33,10 +34,12 @@ firebaseService = inject(FirebaseService);
 printService = inject(NgxPrintService);
 public responsive = inject(BreakpointObserver);
 db = inject(DbService);
+authService = inject(AuthService);
 height = 56;
 songs = this.firebaseService.songs;
 songsFromDb = this.db.songsDb;
 isPhoneviewed = false;
+isLoggin = this.authService.isLoggin;
 
 ngOnInit(){
  this.firebaseService.getAllSongs().subscribe();

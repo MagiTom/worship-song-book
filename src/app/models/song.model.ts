@@ -1,6 +1,7 @@
 export interface Song{
     title: string;
     text: string;
+    link: string;
 }
 
 export interface SongRes extends Song{
@@ -13,6 +14,7 @@ export interface SongDb{
     columns: number;
     songId: string;
     transpose: number;
+    link: string;
 }
 
 export interface SongDbRes extends SongDb{

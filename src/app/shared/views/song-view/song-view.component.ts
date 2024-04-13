@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, inject } 
 import * as Transposer from 'chord-transposer';
 import { SongDbRes, SongRes } from '../../../models/song.model';
 import { FirebaseService } from '../../../services/firebase.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
@@ -40,4 +42,6 @@ const song = this.songEl as SongDbRes;
 const chords = verse.replace(/\[(.*?)\]/g, '$1');
   return Transposer.transpose(chords).up(this.transpose);  
 }
+
+
 }

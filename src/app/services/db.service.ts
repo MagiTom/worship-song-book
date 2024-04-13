@@ -36,7 +36,8 @@ export class DbService extends Dexie {
       text: song.text,
       songId: song.id,
       columns: this.columns(),
-      transpose: this.transpose()
+      transpose: this.transpose(),
+      link: song.link
     }
     try{
       await db.songItems.add(songToAdd);
