@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +23,11 @@ export class LoginComponent {
   password = new FormControl('', [Validators.required]);
   hide = true;
   errorMessage = '';
+
+  @HostListener('document:keydown.enter', ['$event'])
+onSubmit(event: Event) {
+  this.login();
+}
 
   constructor(private authService: AuthService) {
     merge(this.email.statusChanges, this.email.valueChanges)
