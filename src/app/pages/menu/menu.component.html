@@ -12,9 +12,7 @@
     <div class="menu__list">
         @for (song of songs; track song.id) {
         <div class="menu__item">
-            <button (click)="addToDB(song, $event)" mat-icon-button>
-                <mat-icon>add</mat-icon>
-              </button>
+                <mat-icon (click)="addToDB(song, $event)">add</mat-icon>
         <p (click)="goToSong(song.id, $event)" matListItemTitle>{{song.title}}</p>
         </div>
     }
